@@ -26,21 +26,14 @@ A interface foi projetada com foco em **ergonomia cognitiva**, tipografia sem se
 
 ---
 
-## 🎴 Logo 3D Dinâmica: 3 Estados de Validação
+## 🎴 Logo 3D Dinâmica: 3 Estados de Validação (GIF Animado)
 
 A logo central reage em tempo real ao avanço do cartão e ao gabarito da questão:
 
 <div align="center">
-  <img src="docs/assets/logos_3d_comparativo.png" alt="Comparativo dos 3 Estados da Logo 3D" width="580">
-  <p><em>Os três estados reativos: Frente em dúvida (? azul), Verso validado como Certo (✓ verde esmeralda) e Verso validado como Errado (✕ carmim/rubi).</em></p>
+  <img src="docs/assets/logos_3d_animadas.gif" alt="Showcase Animado das 3 Logos 3D" width="560">
+  <p><em>Demonstração em tempo real: Frente em dúvida (carta azul com ?), Verso Certo (giro para verde esmeralda com ✓) e Verso Errado (giro para vermelho carmim com ✕).</em></p>
 </div>
-
-### Animações 3D com Spring Pop e Glow Neon (GIFs):
-
-| Flip para Gabarito CERTO (`✓` Verde Esmeralda) | Flip para Gabarito ERRADO (`✕` Carmim/Rubi) |
-| :---: | :---: |
-| ![Giro 3D Certo](docs/assets/logo_3d_certo_flip.gif) | ![Giro 3D Errado](docs/assets/logo_3d_errado_flip.gif) |
-| *Ao virar um card CERTO, o `?` gira no eixo Y e revela o check `✓` com pulso de brilho neon verde.* | *Ao virar um card ERRADO, a carta gira e revela o `✕` elástico com pulso neon vermelho.* |
 
 ---
 
