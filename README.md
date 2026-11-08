@@ -8,51 +8,60 @@
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Ativo%20(CDN)-success?style=flat-square&logo=github)](https://gilsonnogueira.github.io/anki-templates/version.json)
 [![Anki Desktop](https://img.shields.io/badge/Anki%20Desktop-23.10%2B%20%7C%2024.11%2B-blue?style=flat-square&logo=anki)](https://apps.ankiweb.net/)
 [![AnkiDroid](https://img.shields.io/badge/AnkiDroid-2.17%2B-brightgreen?style=flat-square&logo=android)](https://github.com/ankidroid/Anki-Android)
-[![Engine Version](https://img.shields.io/badge/Engine%20Version-1.0.1-orange?style=flat-square)](./version.json)
+[![Engine Version](https://img.shields.io/badge/Engine%20Version-1.0.2-orange?style=flat-square)](./version.json)
+[![Typography](https://img.shields.io/badge/Font-Inter%20%2F%20Segoe%20UI%20(Sans--Serif)-8a2be2?style=flat-square)](#tipografia-e-ergonomia-visual)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)](LICENSE)
 
 ---
 
 ## 📸 Demonstração Visual dos Cartões
 
-### 1. Visão Geral: Frente e Verso do Cartão
-A interface foi projetada com foco em **ergonomia cognitiva**, tipografia legível, contraste WCAG AAA e design tridimensional limpo.
+### 1. Frente e Versos com Gabarito (CERTO vs ERRADO)
+A interface foi projetada com foco em **ergonomia cognitiva**, tipografia sem serifa (**Inter / Segoe UI**), alto contraste noturno (WCAG AAA) e design tridimensional limpo.
 
-| Frente do Cartão (`Frente.html`) | Verso com Gabarito (`Verso.html`) |
+| Frente do Cartão | Verso — Gabarito CERTO | Verso — Gabarito ERRADO |
+| :---: | :---: | :---: |
+| ![Frente do Card](docs/assets/card_frente.png) | ![Verso Certo](docs/assets/card_verso_certo.png) | ![Verso Errado](docs/assets/card_verso_errado.png) |
+| *Tag de Disciplina, Logo 3D Azul com `?`, assertiva em destaque e controles.* | *Badge verde `CERTO`, Logo 3D Verde com check `✓` e síntese executiva.* | *Badge vermelho `ERRADO`, Logo 3D Vermelha com `✕` e fundamentação.* |
+
+---
+
+## 🎴 Logo 3D Dinâmica: 3 Estados de Validação
+
+A logo central reage em tempo real ao avanço do cartão e ao gabarito da questão:
+
+<div align="center">
+  <img src="docs/assets/logos_3d_comparativo.png" alt="Comparativo dos 3 Estados da Logo 3D" width="580">
+  <p><em>Os três estados reativos: Frente em dúvida (? azul), Verso validado como Certo (✓ verde esmeralda) e Verso validado como Errado (✕ carmim/rubi).</em></p>
+</div>
+
+### Animações 3D com Spring Pop e Glow Neon (GIFs):
+
+| Flip para Gabarito CERTO (`✓` Verde Esmeralda) | Flip para Gabarito ERRADO (`✕` Carmim/Rubi) |
 | :---: | :---: |
-| ![Frente do Card](docs/assets/card_frente.png) | ![Verso do Card](docs/assets/card_verso.png) |
-| *Tag de Disciplina/Assunto, Logo 3D azul com interrogação `?`, assertiva Cebraspe em destaque e barra de controles.* | *Badge dinâmico de gabarito (CERTO/ERRADO), assertiva com realce semântico e síntese executiva BLUF.* |
+| ![Giro 3D Certo](docs/assets/logo_3d_certo_flip.gif) | ![Giro 3D Errado](docs/assets/logo_3d_errado_flip.gif) |
+| *Ao virar um card CERTO, o `?` gira no eixo Y e revela o check `✓` com pulso de brilho neon verde.* | *Ao virar um card ERRADO, a carta gira e revela o `✕` elástico com pulso neon vermelho.* |
 
 ---
 
 ## ✨ Funcionalidades Interativas em Ação (GIFs)
 
-### 🎴 1. Logo 3D com Flip Tridimensional e Feedback Instantâneo
-A logo central reage dinamicamente ao avanço do cartão. Na frente, exibe o ícone de dúvida tridimensional (`?`). No verso, gira suavemente em 3D com animação elástica (*spring pop*), exibindo a insígnia de validação correspondente ao gabarito (`✓` para Certo, `✕` para Errado).
+### 👁️ 1. Alternância Rápida da Pergunta no Verso (Atalho `F` ou Botão)
+Para revisões ultrarrápidas, o aluno pode ocultar ou exibir a assertiva da frente no verso com apenas um toque no botão **F** ou pressionando a tecla **`F`** no teclado. O estado de preferência é salvo instantaneamente.
 
 <div align="center">
-  <img src="docs/assets/logo_3d_flip.gif" alt="Animação 3D Flip da Logo" width="280">
-  <p><em>Giro 3D da logo com efeito elástico e anel neon responsivo.</em></p>
-</div>
-
----
-
-### 👁️ 2. Alternância Rápida da Pergunta no Verso (Atalho `F` ou Botão)
-Para revisões ultrarrápidas, o aluno pode ocultar ou exibir a assertiva da frente no verso com apenas um toque no botão **F** ou pressionando a tecla **`F`** no teclado. O estado de preferência é salvo instantaneamente para os próximos cards.
-
-<div align="center">
-  <img src="docs/assets/toggle_frente_verso.gif" alt="Alternância da Frente no Verso" width="560">
+  <img src="docs/assets/toggle_frente_verso.gif" alt="Alternância da Frente no Verso" width="600">
   <p><em>Exibição e ocultação dinâmica da pergunta no verso via tecla F ou clique.</em></p>
 </div>
 
 ---
 
-### 📖 3. Sanfona Doutrinária BLUF / Mini-Aula (Atalho `X` ou Botão)
-A explicação completa da questão (jurisprudência consolidada, artigos de lei e doutrina de apoio) fica compactada em uma sanfona elegante para não poluir a leitura do gabarito. Pressione a tecla **`X`** ou clique em **Explicar** para uma animação fluida de expansão:
+### 📖 2. Sanfona Doutrinária BLUF / Mini-Aula (Atalho `X` ou Botão)
+A explicação completa da questão (jurisprudência consolidada dos Tribunais Superiores, artigos de lei e doutrina) fica compactada em uma sanfona elegante para não poluir a leitura imediata do gabarito. Pressione a tecla **`X`** ou clique em **Explicar** para expandir suavemente:
 
 <div align="center">
-  <img src="docs/assets/accordion_explicar.gif" alt="Sanfona Explicar e Ocultar" width="560">
-  <p><em>Expansão suave com formatação jurídica, artigos grifados e precedentes dos Tribunais Superiores.</em></p>
+  <img src="docs/assets/accordion_explicar.gif" alt="Sanfona Explicar e Ocultar" width="600">
+  <p><em>Expansão suave com formatação jurídica, artigos grifados e precedentes consolidados.</em></p>
 </div>
 
 #### Detalhe da Explicação Expandida:
@@ -161,11 +170,14 @@ Para atualizar o design, cores, atalhos, lógicas de áudio ou comportamento dos
 anki-templates/
 ├── docs/
 │   └── assets/
-│       ├── accordion_explicar.gif     # Demonstração da sanfona doutrinária
+│       ├── accordion_explicar.gif     # Demonstração da sanfona doutrinária (Inter/Segoe UI)
 │       ├── card_explicacao_aberta.png # Screenshot HD do card expandido
 │       ├── card_frente.png            # Screenshot HD da frente do cartão
-│       ├── card_verso.png             # Screenshot HD do verso do cartão
-│       ├── logo_3d_flip.gif           # Animação do giro 3D da logo
+│       ├── card_verso_certo.png       # Screenshot HD do verso com gabarito CERTO
+│       ├── card_verso_errado.png      # Screenshot HD do verso com gabarito ERRADO
+│       ├── logos_3d_comparativo.png   # Painel com os 3 estados da logo (Dúvida / Certo / Errado)
+│       ├── logo_3d_certo_flip.gif     # Animação do giro 3D para o gabarito CERTO (✓ Verde)
+│       ├── logo_3d_errado_flip.gif    # Animação do giro 3D para o gabarito ERRADO (✕ Vermelho)
 │       └── toggle_frente_verso.gif    # Demonstração da alternância da frente
 ├── backup_original/                   # Cópia de segurança dos templates antigos
 │   ├── Back_original.html

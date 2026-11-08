@@ -116,12 +116,18 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-.card { 
+html, body, .card, #anki-app-root, .main-wrapper, input, button, select, textarea {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
     background-color: var(--card-bg); 
     margin: 0; 
     padding: 18px 14px; 
     text-align: center;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
 }
@@ -962,7 +968,13 @@ pre.mermaid svg {
 
 /* --- RESPONSIVIDADE MOBILE (MÁXIMO APROVEITAMENTO DE TELA PEQUENA) --- */
 @media screen and (max-width: 600px) {
-    .card {
+html, body, .card, #anki-app-root, .main-wrapper, input, button, select, textarea {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
         padding: 8px 6px;
     }
     .main-wrapper {
