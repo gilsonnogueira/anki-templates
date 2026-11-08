@@ -45,7 +45,7 @@ def push_to_github():
     subprocess.run(["git", "commit", "-m", msg], cwd=REPO_DIR, check=False)
     res = subprocess.run(["git", "push", "origin", "main"], cwd=REPO_DIR, check=False)
     if res.returncode == 0:
-        print("\n✅ SUCESSO! Atualização publicada no GitHub Pages!")
+        print("\n[OK] SUCESSO! Atualização publicada no GitHub Pages!")
     else:
         print("\n⚠️ Verifique a conexão ou autenticação do Git.")
 
