@@ -1,0 +1,1177 @@
+/* ==========================================================================
+   TIPOGRAFIA E TOKENS DE DESIGN SYSTEM (TEMA CLARO E NOTURNO)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* --- VARIÁVEIS GLOBAIS: MODO CLARO (PADRÃO) --- */
+:root {
+    --card-bg: #eef2f5; 
+    --wrap-bg: #ffffff; 
+    --wrap-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+    --wrap-border: rgba(15, 23, 42, 0.06); 
+    
+    --text-main: #1e293b; 
+    --text-sub: #334155;
+    --text-comment: #334155;
+    
+    --header-grad: linear-gradient(90deg, #2563eb 0%, #10b981 100%);
+    --header-text: #475569; 
+    --tag-bg: #f1f5f9;
+    --tag-primary-bg: rgba(37, 99, 235, 0.1);
+    --tag-primary-text: #2563eb;
+    
+    --line-color: #e2e8f0;
+
+    --bq-bg: #f8fafc;
+    --bq-border: #3b82f6;
+
+    --btn-border: #2563eb;
+    --btn-text: #2563eb;
+    --btn-hover-bg: #2563eb;
+    --btn-hover-text: #ffffff;
+    --btn-glow: rgba(37, 99, 235, 0.35); 
+
+    --text-bold: #e11d48; 
+    --text-italic: #0284c7; 
+    --text-purple: #7c3aed; 
+
+    --ans-right: #10b981;
+    --ans-wrong: #f43f5e;
+
+    /* Tokens das cartas da Logo (Modo Claro) */
+    --fc-back3: #94a3b8;
+    --fc-back2: #cbd5e1;
+    --fc-back1: #94a3b8;
+    --fc-front-base: #64748b;
+
+    /* Tokens do Botão de Áudio & Pare (Modo Claro) */
+    --tts-idle-bg: rgba(37, 99, 235, 0.07);
+    --tts-idle-border: rgba(37, 99, 235, 0.22);
+    --tts-idle-color: #2563eb;
+    --tts-hover-bg: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+    --tts-hover-shadow: 0 4px 12px rgba(37, 99, 235, 0.32);
+    --tts-stop-bg: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+    --tts-stop-border: rgba(99, 102, 241, 0.45);
+    --tts-stop-glow: rgba(14, 165, 233, 0.38);
+    --tts-ripple-color: rgba(14, 165, 233, 0.45);
+}
+
+/* --- MODO NOTURNO (ANKI DESKTOP E ANKIDROID NIGHT MODE) --- */
+.card.nightMode, .nightMode {
+    --card-bg: #121316; 
+    --wrap-bg: #1c1e24; 
+    --wrap-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    --wrap-border: rgba(255, 255, 255, 0.07); 
+    
+    --text-main: #f1f5f9; 
+    --text-sub: #e2e8f0;
+    --text-comment: #cbd5e1;
+    
+    --header-grad: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+    --header-text: #94a3b8; 
+    --tag-bg: rgba(255, 255, 255, 0.06);
+    --tag-primary-bg: rgba(59, 130, 246, 0.16);
+    --tag-primary-text: #60a5fa;
+
+    --line-color: rgba(255, 255, 255, 0.08);
+
+    --bq-bg: rgba(255, 255, 255, 0.04);
+    --bq-border: #3b82f6;
+
+    --btn-border: #60a5fa;
+    --btn-text: #60a5fa;
+    --btn-hover-bg: #60a5fa;
+    --btn-hover-text: #121316;
+    --btn-glow: rgba(96, 165, 250, 0.35); 
+
+    --text-bold: #fb7185; 
+    --text-italic: #38bdf8; 
+    --text-purple: #c4b5fd; 
+
+    --ans-right: #2ecc71;
+    --ans-wrong: #ff7675;
+
+    /* Tokens das cartas da Logo (Modo Noturno) */
+    --fc-back3: #475569;
+    --fc-back2: #64748b;
+    --fc-back1: #94a3b8;
+    --fc-front-base: #94a3b8;
+
+    /* Tokens do Botão de Áudio & Pare (Modo Noturno - Aurora Cyan/Indigo Glass) */
+    --tts-idle-bg: rgba(56, 189, 248, 0.10);
+    --tts-idle-border: rgba(56, 189, 248, 0.28);
+    --tts-idle-color: #38bdf8;
+    --tts-hover-bg: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    --tts-hover-shadow: 0 4px 14px rgba(56, 189, 248, 0.38);
+    --tts-stop-bg: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+    --tts-stop-border: rgba(52, 211, 153, 0.55);
+    --tts-stop-glow: rgba(16, 185, 129, 0.42);
+    --tts-ripple-color: rgba(56, 189, 248, 0.45);
+}
+
+/* --- CONFIGURAÇÃO BASE DO CARTÃO --- */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card { 
+    background-color: var(--card-bg); 
+    margin: 0; 
+    padding: 18px 14px; 
+    text-align: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- ESTRUTURA DO CARD (ESTÁVEL E SEM FLICKER) --- */
+.card-scene, .flip-scene {
+    max-width: 650px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.main-wrapper {
+    background-color: var(--wrap-bg); 
+    padding: 26px 32px 30px 32px; 
+    border-radius: 14px; 
+    box-shadow: var(--wrap-shadow); 
+    border: 1px solid var(--wrap-border);
+    position: relative; 
+    /* Transição suave e estável sem rotação 3D que causa flicker no WebView */
+    animation: cardStableFadeIn 0.18s ease-out forwards;
+}
+
+.main-wrapper::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+    background: var(--header-grad);
+    border-radius: 14px 14px 0 0;
+}
+
+@keyframes cardStableFadeIn {
+    0% { opacity: 0.88; }
+    100% { opacity: 1; }
+}
+
+/* ==========================================================================
+   CABEÇALHO E LOGO VETORIAL ANIMADA (3 FLASHCARDS EM LEQUE)
+   - Preserva o design simplista original do _flashcard.png (2 cartões cinza + 1 azul).
+   - Recorte dinâmico (paint-order: stroke fill) adaptável ao modo claro e escuro.
+   - Animação de abertura em leque ao carregar + flutuação sutil + expansão no hover.
+   ========================================================================== */
+.header-box { 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 18px; 
+    width: 100%;
+}
+
+.header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-logo-svg {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    overflow: visible;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.header-tags-row, .header-text { 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    text-align: left;
+    width: 100%;
+}
+
+.fc-card {
+    paint-order: stroke fill;
+    stroke: var(--wrap-bg);
+    stroke-width: 2.2px;
+    stroke-linejoin: round;
+}
+
+/* =========================================================
+   LOGO VETORIAL: LEQUE DE 4 CARTAS (3 TRÁS + 1 FRONTAL)
+   - Todas as cartas nascem empilhadas (0deg)
+   - O leque abre após a entrada do card com física suave e fluida
+   - Mantém flutuação orgânica contínua pós-abertura
+   ========================================================= */
+.fc-card-4 {
+    fill: var(--fc-back3);
+    opacity: 0.6;
+    transform-origin: 14px 27px;
+    transform: rotate(0deg);
+    animation: fcFan4 1.15s cubic-bezier(0.2, 0.9, 0.3, 1) 0.38s both,
+               fcFloat4 4.8s ease-in-out 1.8s infinite;
+}
+
+.fc-card-3 {
+    fill: var(--fc-back2);
+    opacity: 0.78;
+    transform-origin: 14px 27px;
+    transform: rotate(0deg);
+    animation: fcFan3 1.15s cubic-bezier(0.2, 0.9, 0.3, 1) 0.30s both,
+               fcFloat3 4.8s ease-in-out 1.8s infinite;
+}
+
+.fc-card-2 {
+    fill: var(--fc-back1);
+    opacity: 0.92;
+    transform-origin: 14px 27px;
+    transform: rotate(0deg);
+    animation: fcFan2 1.15s cubic-bezier(0.2, 0.9, 0.3, 1) 0.22s both,
+               fcFloat2 4.8s ease-in-out 1.8s infinite;
+}
+
+.fc-front-fan {
+    transform-origin: 14px 27px;
+    transform: rotate(0deg);
+    animation: fcFanFront 1.1s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s both,
+               fcFloatFront 4.8s ease-in-out 1.8s infinite;
+}
+
+.fc-front-rect {
+    fill: var(--fc-front-base);
+}
+
+@keyframes fcFan4 {
+    0% { transform: rotate(0deg) scale(0.94); }
+    100% { transform: rotate(46deg) translate(3px, -1.2px) scale(1); }
+}
+
+@keyframes fcFan3 {
+    0% { transform: rotate(0deg) scale(0.96); }
+    100% { transform: rotate(30deg) translate(1.8px, -0.8px) scale(1); }
+}
+
+@keyframes fcFan2 {
+    0% { transform: rotate(0deg) scale(0.98); }
+    100% { transform: rotate(15deg) translate(0.9px, -0.4px) scale(1); }
+}
+
+@keyframes fcFanFront {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(-10deg) scale(1); }
+}
+
+/* Flutuação/respiração orgânica contínua mais suave */
+@keyframes fcFloat4 {
+    0%, 100% { transform: rotate(46deg) translate(3px, -1.2px); }
+    50% { transform: rotate(49deg) translate(3.5px, -1.6px); }
+}
+@keyframes fcFloat3 {
+    0%, 100% { transform: rotate(30deg) translate(1.8px, -0.8px); }
+    50% { transform: rotate(32deg) translate(2.1px, -1.1px); }
+}
+@keyframes fcFloat2 {
+    0%, 100% { transform: rotate(15deg) translate(0.9px, -0.4px); }
+    50% { transform: rotate(16.5deg) translate(1.1px, -0.5px); }
+}
+@keyframes fcFloatFront {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(-11.5deg) translateY(-0.6px); }
+}
+
+/* =========================================================
+   GLIFOS DA CARTA FRONTAL (Default: ocultos exceto com regras ativas)
+   ========================================================= */
+.fc-mark-q, .fc-mark-check, .fc-mark-cross {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* =========================================================
+   FRENTE: CARTA AZUL COM O '?' VISÍVEL IMEDIATAMENTE (GLOW SUAVE)
+   ========================================================= */
+.is-frente .fc-front-rect {
+    fill: url(#fcCyanGrad);
+    transform-origin: 14px 19px;
+    animation: fcFrontPop 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s both;
+}
+
+.is-frente .fc-mark-q {
+    opacity: 1;
+    pointer-events: none;
+    transform-origin: 14px 19px;
+    animation: fcMarkQFrontPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.20s both;
+}
+
+@keyframes fcFrontPop {
+    0% {
+        transform: scale(0.92);
+    }
+    60% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fcMarkQFrontPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.18);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================================================
+   VERSO: O CARD INICIA AZUL COM O '?' VISÍVEL, GIRA NO EIXO Y,
+   O '?' DESAPARECE NO MEIO DO FLIP E REVELA O CHECK (✓) OU CROSS (✕)
+   COM ANIMAÇÃO SPRING POP E GLOW NEON DINÂMICO
+   ========================================================= */
+.is-certo .fc-front-rect {
+    transform-origin: 14px 19px;
+    animation: fcFlipToRight 1.05s cubic-bezier(0.25, 1, 0.35, 1) 0.65s both;
+}
+
+.is-errado .fc-front-rect {
+    transform-origin: 14px 19px;
+    animation: fcFlipToWrong 1.05s cubic-bezier(0.25, 1, 0.35, 1) 0.65s both;
+}
+
+/* O '?' no verso: inicia perfeitamente visível com a carta azul e faz flip out suave ao girar */
+.is-certo .fc-mark-q,
+.is-errado .fc-mark-q {
+    opacity: 1;
+    pointer-events: none;
+    transform-origin: 14px 19px;
+    animation: fcMarkQFlipOut 0.35s ease-in 0.62s forwards;
+}
+
+@keyframes fcMarkQFlipOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) scaleX(1);
+    }
+    45% {
+        opacity: 0.6;
+        transform: scale(0.85) scaleX(0.25);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.3) scaleX(0);
+        visibility: hidden;
+    }
+}
+
+/* Revelação do Check (✓) e Cross (✕) com Spring Bounce e Brilho */
+.is-certo .fc-mark-check {
+    stroke: #ffffff;
+    stroke-width: 2.6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: 14px 19px;
+    animation: fcMarkCheckPop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) 1.12s both;
+}
+
+.is-errado .fc-mark-cross {
+    stroke: #ffffff;
+    stroke-width: 2.6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: 14px 19px;
+    animation: fcMarkCrossPop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) 1.12s both;
+}
+
+@keyframes fcFlipToRight {
+    0% {
+        transform: scaleX(1);
+        fill: url(#fcCyanGrad);
+    }
+    46% {
+        transform: scaleX(0.04);
+        fill: #0284c7;
+    }
+    54% {
+        transform: scaleX(0.04);
+        fill: #059669;
+    }
+    100% {
+        transform: scaleX(1);
+        fill: url(#fcRightGrad);
+    }
+}
+
+@keyframes fcFlipToWrong {
+    0% {
+        transform: scaleX(1);
+        fill: url(#fcCyanGrad);
+    }
+    46% {
+        transform: scaleX(0.04);
+        fill: #0284c7;
+    }
+    54% {
+        transform: scaleX(0.04);
+        fill: #e11d48;
+    }
+    100% {
+        transform: scaleX(1);
+        fill: url(#fcWrongGrad);
+    }
+}
+
+@keyframes fcMarkCheckPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.25) rotate(-14deg);
+    }
+    65% {
+        opacity: 1;
+        transform: scale(1.24) rotate(4deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes fcMarkCrossPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.25) rotate(16deg);
+    }
+    65% {
+        opacity: 1;
+        transform: scale(1.24) rotate(-4deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Pulso de Glow Neon na Logo ao revelar Certo ou Errado */
+.header-logo-svg.is-certo {
+    animation: fcGlowPulseCerto 1.4s ease-out 1.12s both;
+}
+.header-logo-svg.is-errado {
+    animation: fcGlowPulseErrado 1.4s ease-out 1.12s both;
+}
+
+@keyframes fcGlowPulseCerto {
+    0% { filter: drop-shadow(0 0 0 rgba(52, 211, 153, 0)); }
+    40% { filter: drop-shadow(0 2px 14px rgba(52, 211, 153, 0.65)); }
+    100% { filter: drop-shadow(0 2px 8px rgba(52, 211, 153, 0.35)); }
+}
+
+@keyframes fcGlowPulseErrado {
+    0% { filter: drop-shadow(0 0 0 rgba(251, 113, 133, 0)); }
+    40% { filter: drop-shadow(0 2px 14px rgba(251, 113, 133, 0.65)); }
+    100% { filter: drop-shadow(0 2px 8px rgba(251, 113, 133, 0.35)); }
+}
+
+/* Hover interativo: expande ainda mais o leque de 4 cartas */
+.header-logo-svg:hover {
+    filter: drop-shadow(0 2px 8px rgba(56, 189, 248, 0.45));
+}
+.header-logo-svg:hover .fc-card-4 {
+    transform: rotate(54deg) translate(4px, -2px) !important;
+    opacity: 0.85;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.header-logo-svg:hover .fc-card-3 {
+    transform: rotate(36deg) translate(2.5px, -1.2px) !important;
+    opacity: 0.95;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.header-logo-svg:hover .fc-card-2 {
+    transform: rotate(18deg) translate(1.2px, -0.6px) !important;
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.header-logo-svg:hover .fc-front-fan {
+    transform: rotate(-14deg) translateY(-0.8px) scale(1.05) !important;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.header-text { 
+    display: flex; align-items: center; flex-wrap: wrap; gap: 6px; text-align: left;
+}
+.tag {
+    font-size: 0.64em; 
+    text-transform: uppercase; 
+    letter-spacing: 0.8px; 
+    color: var(--header-text); 
+    font-weight: 700; 
+    background-color: var(--tag-bg);
+    padding: 4px 9px;
+    border-radius: 6px;
+    line-height: 1.2;
+}
+.tag-primary {
+    background-color: var(--tag-primary-bg);
+    color: var(--tag-primary-text);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-4px); }
+}
+
+.question-text { 
+    text-align: left; 
+    font-size: 1.16em; 
+    color: var(--text-sub); 
+    font-weight: 500; 
+    line-height: 1.6; 
+    margin-bottom: 8px;
+}
+
+/* --- RESPOSTA (NEON + REFLEXO COMPACTO) --- */
+@keyframes popInElastic {
+    0% { opacity: 0; transform: scale(0.75) translateY(6px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.answer-text {
+    font-size: 1.5em;
+    margin: 10px 0 16px 0;
+    font-weight: 800; 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    animation: popInElastic 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    
+    color: transparent; 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    background-size: 200% auto; 
+    background-position: left center; 
+    transition: text-shadow 0.5s ease-out, transform 0.5s ease-out, background-position 0s; 
+    cursor: default;
+}
+
+.answer-text:hover {
+    transform: scale(1.02) translateY(0) !important; 
+    background-position: right center; 
+    transition: text-shadow 0.5s ease-out, transform 0.5s ease-out, background-position 0.8s ease-in-out; 
+}
+
+.right { 
+    background-image: linear-gradient(110deg, var(--ans-right) 35%, rgba(255,255,255,0.75) 50%, var(--ans-right) 65%);
+    text-shadow: 0 0 8px rgba(46, 204, 113, 0.5), 0 0 16px rgba(46, 204, 113, 0.3); 
+}
+.wrong { 
+    background-image: linear-gradient(110deg, var(--ans-wrong) 35%, rgba(255,255,255,0.75) 50%, var(--ans-wrong) 65%);
+    text-shadow: 0 0 8px rgba(255, 118, 117, 0.5), 0 0 16px rgba(255, 118, 117, 0.3); 
+}
+
+/* --- COMENTÁRIO E BLOCKQUOTE --- */
+.comment-text {
+    text-align: left;
+    color: var(--text-comment);
+    font-size: 1.04em;
+    font-weight: 400;
+    line-height: 1.62;
+    border-top: 1px solid var(--line-color);
+    padding-top: 16px;
+    margin-bottom: 18px;
+}
+
+.comment-text blockquote, .explanation-text blockquote {
+    border: none;
+    border-left: 3px solid var(--bq-border);
+    background-color: var(--bq-bg);
+    font-size: 0.92em;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-main);
+}
+
+/* --- BOTÃO INTERATIVO EXPLICAR --- */
+.explanation-container { margin-top: 16px; }
+.btn-center { 
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important; 
+}
+
+@keyframes buttonShimmerActive {
+    0% { left: -150%; opacity: 0; }
+    10% { opacity: 1; }
+    40% { left: 150%; opacity: 0; }
+    100% { left: 150%; opacity: 0; }
+}
+
+#btn-explain {
+    background: transparent;
+    border: 1.5px solid var(--btn-border); 
+    color: var(--btn-text);
+    padding: 9px 36px;
+    border-radius: 30px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    display: inline-block;
+    font-family: inherit; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+#btn-explain:hover {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-text);
+    box-shadow: 0 4px 14px var(--btn-glow); 
+    transform: translateY(-2px); 
+}
+
+#btn-explain.active {
+    background: var(--btn-border);
+    color: var(--wrap-bg);
+    box-shadow: 0 2px 8px var(--btn-glow);
+    transform: translateY(0) scale(0.98); 
+}
+
+#btn-explain.active::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -150%; 
+    width: 80px; 
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    animation: buttonShimmerActive 5s ease-in-out infinite; 
+    pointer-events: none; 
+}
+
+.explanation-divider {
+    border: 0; height: 1px;
+    background: var(--line-color);
+    margin: 14px 0 18px 0;
+}
+
+.explanation-text {
+    text-align: left; font-size: 1em; font-weight: 400; line-height: 1.65; color: var(--text-main);
+}
+
+/* --- FORMATAÇÃO DE TEXTOS --- */
+.question-text strong, .question-text b, .comment-text strong, .comment-text b, .explanation-text strong, .explanation-text b {
+    color: var(--text-bold); font-weight: 700;
+}
+.question-text em, .question-text i, .comment-text em, .comment-text i, .explanation-text em, .explanation-text i {
+    color: var(--text-italic); font-style: italic; font-weight: 600; 
+}
+
+.comment-text blockquote p strong:first-child, .comment-text blockquote p b:first-child,
+.comment-text blockquote div strong:first-child, .comment-text blockquote div b:first-child,
+.comment-text blockquote > strong:first-child, .comment-text blockquote > b:first-child {
+    color: var(--text-purple); 
+}
+
+.explanation-text ul, .comment-text ul { padding-left: 18px; margin-top: 8px; }
+.explanation-text li, .comment-text li { margin-bottom: 6px; }
+
+/* --- SUPORTE RESPONSIVO E NÍTIDO AO MERMAID OFFLINE --- */
+.mermaid-box {
+    width: 100%;
+    margin: 16px auto;
+    overflow-x: auto;
+    text-align: center;
+    -webkit-overflow-scrolling: touch;
+}
+
+pre.mermaid, pre.mermaid-pending {
+    display: inline-block;
+    background: transparent !important;
+    border: none !important;
+    margin: 0 auto;
+    padding: 0;
+}
+
+pre.mermaid svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 92% !important;
+    height: auto !important;
+    min-width: 280px;
+}
+
+/* --- REFORÇO DE ACESSIBILIDADE E MODO CLARO / ESCURO --- */
+.explanation-text, .explanation-text p, .explanation-text span, .explanation-text div:not(.mermaid):not(.mermaid-pending) {
+    color: var(--text-main) !important;
+}
+
+.explanation-text h1, .explanation-text h2, .explanation-text h3, .explanation-text h4 {
+    color: var(--text-bold) !important;
+}
+
+.explanation-text strong, .explanation-text b {
+    color: var(--text-bold) !important;
+}
+
+.explanation-text em, .explanation-text i {
+    color: var(--text-italic) !important;
+}
+
+.explanation-text blockquote {
+    color: var(--text-main) !important;
+    background-color: var(--bq-bg) !important;
+    border-left-color: var(--bq-border) !important;
+}
+
+/* ==========================================================================
+   NOVO BOTÃO DE ÁUDIO E PARE (AURORA GLASSMORPHISM + SONIC RIPPLE SVG)
+   - Substitui emojis por ícones vetoriais SVG com animação de ondas sonoras.
+   - Estado 'speaking' (Pare): Gradiente Aurora (Azul->Esmeralda/Ciano) com
+     ondas concêntricas ('::before' e '::after') e núcleo quadrado arredondado.
+   ========================================================================== */
+.btn-tts {
+    position: relative;
+    background: var(--tts-idle-bg);
+    border: 1px solid var(--tts-idle-border);
+    color: var(--tts-idle-color);
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    box-sizing: border-box;
+    outline: none;
+    z-index: 1;
+}
+
+.header-actions {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.header-box > .btn-tts {
+    margin-left: auto;
+}
+
+/* Botão Interruptor de Reprodução Automática (Auto / Manual) */
+.btn-autoplay {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border: 1px solid var(--tts-idle-border);
+    background: var(--tts-idle-bg);
+    color: var(--tts-idle-color);
+    transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.btn-autoplay .autoplay-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    transition: all 0.22s ease;
+}
+
+.btn-autoplay.is-active {
+    background: rgba(14, 165, 233, 0.16);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #0284c7;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.12);
+}
+
+.nightMode .btn-autoplay.is-active,
+.night_mode .btn-autoplay.is-active {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.14);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.btn-autoplay.is-active .autoplay-dot {
+    background: #0ea5e9;
+    opacity: 1;
+    box-shadow: 0 0 6px #38bdf8;
+}
+
+.nightMode .btn-autoplay.is-active .autoplay-dot,
+.night_mode .btn-autoplay.is-active .autoplay-dot {
+    background: #38bdf8;
+}
+
+.btn-autoplay.is-manual {
+    opacity: 0.78;
+}
+
+.btn-autoplay:hover {
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.btn-tts .tts-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    transition: transform 0.25s ease;
+}
+
+.btn-tts .tts-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+/* Hover elegante no estado ocioso (Ouvir) */
+.btn-tts:hover:not(.speaking):not(.loading) {
+    background: var(--tts-hover-bg);
+    border-color: transparent;
+    color: #ffffff;
+    transform: translateY(-1px) scale(1.06);
+    box-shadow: var(--tts-hover-shadow);
+}
+
+.btn-tts:hover:not(.speaking):not(.loading) .tts-wave-1 {
+    animation: ttsWavePulse 1s infinite ease-in-out;
+}
+.btn-tts:hover:not(.speaking):not(.loading) .tts-wave-2 {
+    animation: ttsWavePulse 1s infinite ease-in-out 0.18s;
+}
+
+@keyframes ttsWavePulse {
+    0%, 100% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 0.45; transform: translateX(1.2px); }
+}
+
+/* Estado Loading (Carregando stream) */
+.btn-tts.loading {
+    background: var(--tts-idle-bg);
+    border-color: var(--tts-idle-color);
+    color: var(--tts-idle-color);
+}
+
+.btn-tts.loading .tts-spinner {
+    animation: ttsSpin 0.85s linear infinite;
+}
+
+@keyframes ttsSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estado Speaking / Pare (Reproduzindo Áudio - Aurora Cyan/Emerald Glass) */
+.btn-tts.speaking {
+    background: var(--tts-stop-bg) !important;
+    border-color: var(--tts-stop-border) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 14px var(--tts-stop-glow) !important;
+    transform: scale(1.04);
+}
+
+/* Duplo anel de onda sônica concêntrica ao redor do botão Pare */
+.btn-tts.speaking::before,
+.btn-tts.speaking::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1.5px solid var(--tts-ripple-color);
+    pointer-events: none;
+    z-index: -1;
+    animation: ttsSonicRipple 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.btn-tts.speaking::after {
+    animation-delay: 0.9s;
+}
+
+@keyframes ttsSonicRipple {
+    0% {
+        transform: scale(0.92);
+        opacity: 0.85;
+    }
+    100% {
+        transform: scale(1.65);
+        opacity: 0;
+    }
+}
+
+/* Respiração suave do núcleo arredondado de Pare */
+.btn-tts.speaking .tts-stop-core {
+    transform-origin: center;
+    animation: ttsCoreBreathe 1.4s ease-in-out infinite;
+}
+
+@keyframes ttsCoreBreathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.88); }
+}
+
+.btn-tts.speaking:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--tts-stop-glow) !important;
+}
+
+/* --- RESPONSIVIDADE MOBILE (MÁXIMO APROVEITAMENTO DE TELA PEQUENA) --- */
+@media screen and (max-width: 600px) {
+    .card {
+        padding: 8px 6px;
+    }
+    .main-wrapper {
+        padding: 18px 15px 20px 15px;
+        border-radius: 12px;
+    }
+    .header-box {
+        margin-bottom: 14px;
+        gap: 10px;
+    }
+    .header-logo-svg {
+        width: 42px;
+        height: 42px;
+    }
+    .header-tags-row .tag {
+        font-size: 0.68em;
+        padding: 4px 8px;
+        line-height: 1.25;
+    }
+    .question-text {
+        font-size: 1.06em;
+        line-height: 1.54;
+    }
+    .answer-text {
+        font-size: 1.35em;
+        margin: 6px 0 12px 0;
+    }
+    .comment-text, .explanation-text {
+        font-size: 0.96em;
+        line-height: 1.56;
+        padding-top: 12px;
+        margin-bottom: 14px;
+    }
+    .comment-text blockquote, .explanation-text blockquote {
+        padding: 10px 12px;
+        margin: 10px 0;
+    }
+    pre.mermaid svg {
+        max-width: 100% !important;
+        min-width: 260px;
+    }
+}
+
+
+
+/* Botão Toggle Frente no Verso (à esquerda de Auto/Manual) */
+.btn-toggle-front {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border: 1px solid var(--tts-idle-border);
+    background: var(--tts-idle-bg);
+    color: var(--tts-idle-color);
+    transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.btn-toggle-front .front-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    transition: all 0.22s ease;
+}
+
+/* Estado Ativo: Frente Visível no Verso */
+.btn-toggle-front.is-active {
+    background: rgba(14, 165, 233, 0.16);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #0284c7;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.12);
+}
+
+.nightMode .btn-toggle-front.is-active,
+.night_mode .btn-toggle-front.is-active {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.14);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.btn-toggle-front.is-active .front-dot {
+    background: #0ea5e9;
+    opacity: 1;
+    box-shadow: 0 0 6px #38bdf8;
+}
+
+.nightMode .btn-toggle-front.is-active .front-dot,
+.night_mode .btn-toggle-front.is-active .front-dot {
+    background: #38bdf8;
+    box-shadow: 0 0 6px #38bdf8;
+}
+
+/* Estado Desativado: Frente Oculta no Verso */
+.btn-toggle-front.is-inactive {
+    opacity: 0.7;
+    background: var(--tts-idle-bg);
+    border-color: var(--tts-idle-border);
+    color: var(--tts-idle-color);
+}
+
+.btn-toggle-front.is-inactive .front-dot {
+    background: currentColor;
+    opacity: 0.35;
+    box-shadow: none;
+}
+
+.nightMode .btn-toggle-front.is-inactive .front-dot,
+.night_mode .btn-toggle-front.is-inactive .front-dot {
+    background: currentColor;
+    opacity: 0.35;
+    box-shadow: none;
+}
+
+.btn-toggle-front:hover {
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.btn-toggle-front:active {
+    transform: scale(0.96);
+}
+
+/* ==========================================================================
+   FRENTE NO VERSO (SEM CAIXA, SUTIL, FONTE REDUZIDA PARA APOIO E CONFRONTO)
+   ========================================================================== */
+#front-back-box,
+.front-back-box,
+.question-back-box {
+    background: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 0 10px 0 !important;
+    margin: 4px 0 14px 0 !important;
+    text-align: left !important;
+    border-bottom: 1px dashed rgba(148, 163, 184, 0.3) !important;
+}
+
+#front-back-box .question-back,
+.front-back-box .question-back,
+.question-back-box .question-back {
+    font-size: 0.88em !important;
+    line-height: 1.48 !important;
+    color: #64748b !important;
+    font-weight: 400 !important;
+    margin-bottom: 0 !important;
+    letter-spacing: 0.01em;
+}
+
+.nightMode #front-back-box .question-back,
+.night_mode #front-back-box .question-back {
+    color: #94a3b8 !important;
+}
+
+#front-back-box .question-back strong,
+.front-back-box .question-back strong {
+    font-weight: 600 !important;
+    color: #334155 !important;
+}
+
+.nightMode #front-back-box .question-back strong,
+.night_mode #front-back-box .question-back strong {
+    color: #cbd5e1 !important;
+}
+
+#front-back-box .question-back em,
+.front-back-box .question-back em {
+    font-style: italic !important;
+}
+
+/* Resiliência e Fallback para Resposta */
+.answer-text {
+    font-size: 1.5em;
+    margin: 10px 0 16px 0;
+    font-weight: 800; 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: default;
+    color: #e11d48;
+}
+.answer-text.right {
+    color: #059669 !important;
+    background-image: linear-gradient(110deg, var(--ans-right, #2ecc71) 35%, rgba(255,255,255,0.75) 50%, var(--ans-right, #2ecc71) 65%) !important;
+    -webkit-background-clip: text !important; 
+    background-clip: text !important;
+    color: transparent !important;
+    text-shadow: 0 0 8px rgba(46, 204, 113, 0.5), 0 0 16px rgba(46, 204, 113, 0.3) !important;
+}
+.answer-text.wrong {
+    color: #e11d48 !important;
+    background-image: linear-gradient(110deg, var(--ans-wrong, #ff7675) 35%, rgba(255,255,255,0.75) 50%, var(--ans-wrong, #ff7675) 65%) !important;
+    -webkit-background-clip: text !important; 
+    background-clip: text !important;
+    color: transparent !important;
+    text-shadow: 0 0 8px rgba(255, 118, 117, 0.5), 0 0 16px rgba(255, 118, 117, 0.3) !important;
+}
+
