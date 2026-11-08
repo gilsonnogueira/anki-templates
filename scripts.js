@@ -703,7 +703,7 @@
         var port = window.__ELEVEN_PORT__ || 8766;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://127.0.0.1:' + port + '/status', true);
-        xhr.timeout = 400;
+        xhr.timeout = 1200;
         xhr.onload = function() {
             if (xhr.status === 200) {
                 try {
@@ -720,9 +720,9 @@
                 callback(false);
             }
         };
-        xhr.onerror = function() { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); };
-        xhr.ontimeout = function() { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); };
-        try { xhr.send(); } catch(e) { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); }
+        xhr.onerror = function() { callback(false); };
+        xhr.ontimeout = function() { callback(false); };
+        try { xhr.send(); } catch(e) { callback(false); }
     }
 
     function executarFala(textoLimpo, triggerBtn, side, targetName) {
@@ -1501,7 +1501,7 @@
         var port = window.__ELEVEN_PORT__ || 8766;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'http://127.0.0.1:' + port + '/status', true);
-        xhr.timeout = 400;
+        xhr.timeout = 1200;
         xhr.onload = function() {
             if (xhr.status === 200) {
                 try {
@@ -1518,9 +1518,9 @@
                 callback(false);
             }
         };
-        xhr.onerror = function() { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); };
-        xhr.ontimeout = function() { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); };
-        try { xhr.send(); } catch(e) { sessionStorage.setItem('has_eleven_addon', 'false'); callback(false); }
+        xhr.onerror = function() { callback(false); };
+        xhr.ontimeout = function() { callback(false); };
+        try { xhr.send(); } catch(e) { callback(false); }
     }
 
     function executarFala(textoLimpo, triggerBtn, side, targetName) {
