@@ -14,9 +14,29 @@
         rawFields.setAttribute('data-mounted', 'true');
     }
 
+    function sanitizeMarkdown(html) {
+        if (!html || typeof html !== 'string') return '';
+        // 1. Negrito + Itálico: ***texto*** ou ___texto___
+        html = html.replace(/(\*\*\*|___)(.+?)\1/g, '<b><i>$2</i></b>');
+        // 2. Negrito: **texto**
+        html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+        // 3. Itálico: *texto* (suporta parênteses e pontuações: (*texto*) -> (<i>texto</i>))
+        html = html.replace(/(^|[^\*])\*([^\*\s][^\*]*?[^\*\s]|\S)\*([^\*]|$)/g, '$1<i>$2</i>$3');
+        html = html.replace(/(^|[^\*])\*([^\*\s][^\*]*?[^\*\s]|\S)\*([^\*]|$)/g, '$1<i>$2</i>$3');
+        // 4. Itálico: _texto_ (sem quebrar snake_case)
+        html = html.replace(/(^|[^a-zA-Z0-9_])_([^\_\s][^_]*?[^_\s]|\S)_([^a-zA-Z0-9_]|$)/g, '$1<i>$2</i>$3');
+        html = html.replace(/(^|[^a-zA-Z0-9_])_([^\_\s][^_]*?[^_\s]|\S)_([^a-zA-Z0-9_]|$)/g, '$1<i>$2</i>$3');
+        // 5. Código inline: `código`
+        html = html.replace(/`([^`]+?)`/g, '<code class="inline-code">$1</code>');
+        // 6. Tachado: ~~texto~~
+        html = html.replace(/~~(.+?)~~/g, '<s>$1</s>');
+        return html;
+    }
+
     function getRawField(id) {
         var el = document.getElementById(id);
-        return el ? el.innerHTML : '';
+        var val = el ? el.innerHTML : '';
+        return sanitizeMarkdown(val);
     }
 
     var side = rawFields ? (rawFields.getAttribute('data-side') || 'front') : (document.getElementById('answer') ? 'back' : 'front');
