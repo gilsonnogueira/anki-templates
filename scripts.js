@@ -68,12 +68,21 @@
                     else if (ch === '\u200B') binary += '0';
                 }
                 if (binary.length >= 8 && binary.length % 8 === 0) {
-                    var out = '';
+                    var byteList = [];
                     for (var j = 0; j < binary.length; j += 8) {
-                        out += String.fromCharCode(parseInt(binary.substr(j, 8), 2));
+                        byteList.push(parseInt(binary.substr(j, 8), 2));
                     }
-                    if (out && out.indexOf('LIC:') === 0) {
-                        return out.replace(/^LIC:/, '');
+                    try {
+                        var decoded = new TextDecoder('utf-8').decode(new Uint8Array(byteList));
+                        if (decoded && decoded.indexOf('LIC:') === 0) {
+                            return decoded.replace(/^LIC:/, '');
+                        }
+                    } catch(e) {
+                        var chars = '';
+                        for (var k = 0; k < byteList.length; k++) {
+                            chars += String.fromCharCode(byteList[k]);
+                        }
+                        if (chars.indexOf('LIC:') === 0) return chars.replace(/^LIC:/, '');
                     }
                 }
             }
