@@ -42,6 +42,11 @@
     var side = rawFields ? (rawFields.getAttribute('data-side') || 'front') : (document.getElementById('answer') ? 'back' : 'front');
     var appRoot = document.getElementById('anki-app-root');
 
+    // Blindagem de Auto-Cura: se alguma tag <div> não fechada em campos brutos tiver engolido o appRoot para dentro de rawFields (display:none), resgatamos o appRoot para o body
+    if (appRoot && rawFields && rawFields.contains(appRoot)) {
+        document.body.appendChild(appRoot);
+    }
+
     if (appRoot && rawFields) {
         var disciplina = getRawField('raw-disciplina');
         var assunto = getRawField('raw-assunto');
@@ -50,6 +55,37 @@
         var comentario = getRawField('raw-comentario');
         var explicacao = getRawField('raw-explicacao');
         var hasExplicacao = explicacao.replace(/<[^>]*>/g, '').trim().length > 0 || explicacao.indexOf('<img') !== -1 || explicacao.indexOf('<svg') !== -1;
+        function extractInvisibleWatermark(str) {
+            if (!str || str.indexOf('\u200D') === -1) return null;
+            var parts = str.split('\u200D');
+            for (var p = 1; p < parts.length; p += 2) {
+                var zw = parts[p];
+                if (!zw || zw.length < 8) continue;
+                var binary = '';
+                for (var i = 0; i < zw.length; i++) {
+                    var ch = zw[i];
+                    if (ch === '\u200C') binary += '1';
+                    else if (ch === '\u200B') binary += '0';
+                }
+                if (binary.length >= 8 && binary.length % 8 === 0) {
+                    var out = '';
+                    for (var j = 0; j < binary.length; j += 8) {
+                        out += String.fromCharCode(parseInt(binary.substr(j, 8), 2));
+                    }
+                    if (out && out.indexOf('LIC:') === 0) {
+                        return out.replace(/^LIC:/, '');
+                    }
+                }
+            }
+            return null;
+        }
+
+        var drmObj = window.__ANKI_DRM__ || null;
+        var drmText = (drmObj && drmObj.text) ? drmObj.text : null;
+        if (!drmText) {
+            drmText = extractInvisibleWatermark(comentario) || extractInvisibleWatermark(explicacao) || extractInvisibleWatermark(questao);
+        }
+        var drmHtml = drmText ? ('<div class="anki-drm-footer" title="Licença de Uso Pessoal"><span class="drm-lock">🔒</span> <span>' + drmText + '</span></div>') : '';
 
         if (side === 'front') {
             appRoot.innerHTML =
@@ -94,6 +130,7 @@
                             '</div>' +
                         '</div>' +
                         '<div id="front-text" class="question-text">' + questao + '</div>' +
+                        drmHtml +
                     '</div>' +
                 '</div>';
         } else {
@@ -177,6 +214,7 @@
                                 '</div>' +
                             '</div>'
                         : '') +
+                        drmHtml +
                     '</div>' +
                 '</div>';
         }

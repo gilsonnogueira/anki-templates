@@ -750,6 +750,26 @@ pre.mermaid svg {
     border-left-color: var(--bq-border) !important;
 }
 
+/* --- COLORIMETRIA DE TRÂNSITO E SINALIZAÇÃO VEICULAR (CONTRAN) --- */
+.luz-vermelha, span.luz-vermelha, strong.luz-vermelha, b.luz-vermelha {
+    color: #ef4444 !important;
+}
+.luz-branca, span.luz-branca, strong.luz-branca, b.luz-branca {
+    color: #ffffff !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    padding: 1px 5px !important;
+    border-radius: 3px !important;
+}
+.luz-ambar, .luz-amarela, span.luz-ambar, span.luz-amarela, strong.luz-ambar, b.luz-ambar {
+    color: #f59e0b !important;
+}
+.luz-azul, span.luz-azul, strong.luz-azul, b.luz-azul {
+    color: #38bdf8 !important;
+}
+.luz-verde, span.luz-verde, strong.luz-verde, b.luz-verde {
+    color: #10b981 !important;
+}
+
 /* ==========================================================================
    NOVO BOTÃO DE ÁUDIO E PARE (AURORA GLASSMORPHISM + SONIC RIPPLE SVG)
    - Substitui emojis por ícones vetoriais SVG com animação de ondas sonoras.
@@ -1187,3 +1207,36 @@ html, body, .card, #anki-app-root, .main-wrapper, input, button, select, textare
     text-shadow: 0 0 8px rgba(255, 118, 117, 0.5), 0 0 16px rgba(255, 118, 117, 0.3) !important;
 }
 
+
+
+/* ==========================================================================
+   RODAPÉ DRM DE PROTEÇÃO INTELECTUAL (MODO BETA E MODO COMERCIAL)
+   ========================================================================== */
+.anki-drm-footer {
+    margin-top: 22px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line-color, rgba(148, 163, 184, 0.22));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.03em;
+    color: #94a3b8 !important;
+    opacity: 0.75;
+    user-select: none;
+    pointer-events: none;
+    text-align: center;
+}
+
+.nightMode .anki-drm-footer,
+.night_mode .anki-drm-footer {
+    color: #64748b !important;
+    border-top-color: rgba(255, 255, 255, 0.07);
+}
+
+.anki-drm-footer .drm-lock {
+    font-size: 10px;
+    opacity: 0.85;
+}
