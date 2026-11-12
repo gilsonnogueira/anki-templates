@@ -1240,3 +1240,94 @@ html, body, .card, #anki-app-root, .main-wrapper, input, button, select, textare
     font-size: 10px;
     opacity: 0.85;
 }
+
+
+/* ==========================================================================
+   ESTILIZACAO 3D NEON DE OMISSAO DE PALAVRAS (CLOZE DELETION)
+   ========================================================================== */
+.cloze {
+    display: inline-block;
+    padding: 2px 10px;
+    margin: 0 3px;
+    border-radius: 8px;
+    font-weight: 700;
+    line-height: 1.4;
+    vertical-align: baseline;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1. Na Frente (A Lacuna Ativa [...]) */
+.card-scene #front-text .cloze,
+[data-side="front"] .cloze,
+.is-frente .cloze {
+    color: #38bdf8 !important;
+    background: rgba(56, 189, 248, 0.12) !important;
+    border: 1.5px dashed #38bdf8 !important;
+    box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    letter-spacing: 1px;
+    cursor: default;
+    user-select: none;
+    animation: clozePulse 2.5s infinite ease-in-out;
+}
+
+/* 2. No Verso (O Termo Revelado) */
+.card-scene #front-text-back .cloze,
+[data-side="back"] .cloze,
+#front-back-box .cloze {
+    color: #34d399 !important;
+    background: rgba(16, 185, 129, 0.16) !important;
+    border: 1.5px solid #10b981 !important;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+    font-weight: 800;
+    animation: clozeReveal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Animacoes */
+@keyframes clozeReveal {
+    0% { transform: scale(0.92); opacity: 0.6; filter: brightness(1.4); }
+    100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+}
+
+@keyframes clozePulse {
+    0%, 100% { border-color: #38bdf8; box-shadow: 0 0 8px rgba(56, 189, 248, 0.2); }
+    50% { border-color: #0ea5e9; box-shadow: 0 0 16px rgba(14, 165, 233, 0.4); }
+}
+
+/* Tema Claro (Light Mode) */
+body:not(.nightMode):not(.night_mode) .card-scene #front-text .cloze,
+body:not(.nightMode):not(.night_mode) [data-side="front"] .cloze {
+    color: #0284c7 !important;
+    background: rgba(2, 132, 199, 0.08) !important;
+    border: 1.5px dashed #0284c7 !important;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.12);
+}
+
+body:not(.nightMode):not(.night_mode) .card-scene #front-text-back .cloze,
+body:not(.nightMode):not(.night_mode) [data-side="back"] .cloze,
+body:not(.nightMode):not(.night_mode) #front-back-box .cloze {
+    color: #059669 !important;
+    background: rgba(5, 150, 105, 0.12) !important;
+    border: 1.5px solid #059669 !important;
+    box-shadow: 0 0 10px rgba(5, 150, 105, 0.2);
+}
+
+/* Ajustes estruturais para Card de Omissao no Verso */
+.is-cloze-card #front-back-box {
+    border-bottom: none !important;
+    padding-bottom: 6px !important;
+    margin-bottom: 14px !important;
+    font-size: 1.16em !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    color: var(--text-main, #f1f5f9) !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.is-cloze-card #answer {
+    display: none !important;
+}
+
+.is-cloze-card #btn-toggle-front-back {
+    display: none !important;
+}

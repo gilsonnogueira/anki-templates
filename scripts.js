@@ -55,6 +55,7 @@
         var comentario = getRawField('raw-comentario');
         var explicacao = getRawField('raw-explicacao');
         var hasExplicacao = explicacao.replace(/<[^>]*>/g, '').trim().length > 0 || explicacao.indexOf('<img') !== -1 || explicacao.indexOf('<svg') !== -1;
+        var isCloze = (questao && (questao.indexOf('class="cloze"') !== -1 || questao.indexOf("class='cloze'") !== -1)) || (rawFields && rawFields.querySelector('.cloze') !== null) || (!resposta || resposta.trim().length === 0);
         function extractInvisibleWatermark(str) {
             if (!str || str.indexOf('\u200D') === -1) return null;
             var parts = str.split('\u200D');
@@ -99,7 +100,7 @@
         if (side === 'front') {
             appRoot.innerHTML =
                 '<div class="card-scene">' +
-                    '<div class="main-wrapper">' +
+                    '<div class="main-wrapper' + (isCloze ? ' is-cloze-card' : '') + '">' +
                         '<div class="header-box">' +
                             '<div class="header-top-row">' +
                                 '<svg class="header-logo-svg is-frente" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flashcards">' +
@@ -145,7 +146,7 @@
         } else {
             appRoot.innerHTML =
                 '<div class="card-scene">' +
-                    '<div class="main-wrapper">' +
+                    '<div class="main-wrapper' + (isCloze ? ' is-cloze-card' : '') + '">' +
                         '<div class="header-box">' +
                             '<div class="header-top-row">' +
                                 '<svg class="header-logo-svg" id="header-logo-svg" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flashcards">' +
@@ -174,10 +175,10 @@
                                     '</g>' +
                                 '</svg>' +
                                 '<div class="header-actions">' +
-                                    '<button id="btn-toggle-front-back" type="button" class="btn-toggle-front is-active" onclick="window.toggleFrontBackPref(event)" title="Alternar exibição da frente no verso (Atalho: F)">' +
+                                    (!isCloze ? '<button id="btn-toggle-front-back" type="button" class="btn-toggle-front is-active" onclick="window.toggleFrontBackPref(event)" title="Alternar exibição da frente no verso (Atalho: F)">' +
                                         '<span class="front-dot"></span>' +
                                         '<span class="front-label">Frente</span>' +
-                                    '</button>' +
+                                    '</button>' : '') +
                                     '<button id="btn-toggle-autoplay-back" type="button" class="btn-autoplay is-manual" onclick="window.toggleAutoplayPref(event)" title="Alternar Reprodução Automática">' +
                                         '<span class="autoplay-dot"></span>' +
                                         '<span class="autoplay-label">Manual</span>' +
@@ -201,7 +202,7 @@
                         '<div id="front-back-box" class="front-back-box">' +
                             '<div id="front-text-back" class="question-back">' + questao + '</div>' +
                         '</div>' +
-                        '<div id="answer" class="answer-text">' + resposta + '</div>' +
+                        (!isCloze && resposta && resposta.trim() ? '<div id="answer" class="answer-text">' + resposta + '</div>' : '') +
                         '<div id="comment-box" class="comment-text">' + comentario + '</div>' +
                         (hasExplicacao ?
                             '<div class="explanation-container">' +
@@ -1135,7 +1136,10 @@
         var logos = document.querySelectorAll('.header-logo-svg');
         for (var lg = 0; lg < logos.length; lg++) {
             logos[lg].classList.remove('is-certo', 'is-errado');
-            if (answerText === 'CERTO') {
+            if (isCloze || !answerText) {
+                logos[lg].classList.remove('is-errado');
+                logos[lg].classList.add('is-certo');
+            } else if (answerText === 'CERTO') {
                 logos[lg].classList.add('is-certo');
             } else if (answerText === 'ERRADO') {
                 logos[lg].classList.add('is-errado');
