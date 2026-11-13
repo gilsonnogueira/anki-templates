@@ -40,17 +40,32 @@
     }
 
     function triggerMathJaxRender() {
-        try {
-            if (window.MathJax) {
-                if (typeof MathJax.typesetPromise === 'function') {
-                    MathJax.typesetPromise().catch(function(err){});
-                } else if (typeof MathJax.typeset === 'function') {
-                    MathJax.typeset();
-                } else if (MathJax.Hub && typeof MathJax.Hub.Queue === 'function') {
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        var attempts = 0;
+        function tryRender() {
+            attempts++;
+            try {
+                if (window.MathJax) {
+                    if (typeof MathJax.typesetClear === 'function') {
+                        try { MathJax.typesetClear(); } catch(e) {}
+                    }
+                    if (typeof MathJax.typesetPromise === 'function') {
+                        MathJax.typesetPromise().catch(function(err){});
+                        return;
+                    } else if (typeof MathJax.typeset === 'function') {
+                        MathJax.typeset();
+                        return;
+                    } else if (MathJax.Hub && typeof MathJax.Hub.Queue === 'function') {
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                        return;
+                    }
                 }
+            } catch(e) {}
+            
+            if (attempts < 25) {
+                setTimeout(tryRender, attempts < 5 ? 40 : 100);
             }
-        } catch(e) {}
+        }
+        tryRender();
     }
 
 
