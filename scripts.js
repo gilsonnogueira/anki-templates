@@ -373,7 +373,7 @@
     function extrairTextoElemento(el) {
         if (!el) return '';
         var clone = el.cloneNode(true);
-        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style, .tts-ignore, [data-tts="ignore"], mjx-container, .MathJax, math');
+        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style, .tts-ignore, [data-tts="ignore"], mjx-container, mjx-assistive-mml, .MathJax, .MathJax_Preview, math, [aria-hidden="true"]');
         for (var i = 0; i < ignorar.length; i++) {
             if (ignorar[i].parentNode) ignorar[i].parentNode.removeChild(ignorar[i]);
         }
@@ -1174,7 +1174,7 @@
     function extrairTextoElemento(el) {
         if (!el) return '';
         var clone = el.cloneNode(true);
-        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style');
+        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style, .tts-ignore, [data-tts="ignore"], mjx-container, mjx-assistive-mml, .MathJax, .MathJax_Preview, math, [aria-hidden="true"]');
         for (var i = 0; i < ignorar.length; i++) {
             if (ignorar[i].parentNode) ignorar[i].parentNode.removeChild(ignorar[i]);
         }
