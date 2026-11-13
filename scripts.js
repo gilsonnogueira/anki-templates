@@ -14,22 +14,31 @@
         rawFields.setAttribute('data-mounted', 'true');
     }
 
-    function sanitizeMarkdown(html) {
+        function sanitizeMarkdown(html) {
         if (!html || typeof html !== 'string') return '';
-        // 1. Negrito + Itálico: ***texto*** ou ___texto___
+        var stash = [];
+        function saveToken(match) {
+            stash.push(match);
+            return '@@TKN' + (stash.length - 1) + '@@';
+        }
+        
+        // 1. Proteger fórmulas matemáticas e tags HTML contra corrupção de Markdown
+        html = html.replace(/\\\[[\s\S]*?\\\]/g, saveToken);
+        html = html.replace(/\\\([\s\S]*?\\\\)/g, saveToken);
+        html = html.replace(/<anki-mathjax[\s\S]*?<\/anki-mathjax>/gi, saveToken);
+        html = html.replace(/<[^>]+>/g, saveToken);
+        
+        // 2. Markdown apenas em texto puro
         html = html.replace(/(\*\*\*|___)(.+?)\1/g, '<b><i>$2</i></b>');
-        // 2. Negrito: **texto**
         html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
-        // 3. Itálico: *texto* (suporta parênteses e pontuações: (*texto*) -> (<i>texto</i>))
         html = html.replace(/(^|[^\*])\*([^\*\s][^\*]*?[^\*\s]|\S)\*([^\*]|$)/g, '$1<i>$2</i>$3');
-        html = html.replace(/(^|[^\*])\*([^\*\s][^\*]*?[^\*\s]|\S)\*([^\*]|$)/g, '$1<i>$2</i>$3');
-        // 4. Itálico: _texto_ (sem quebrar snake_case)
-        html = html.replace(/(^|[^a-zA-Z0-9_])_([^\_\s][^_]*?[^_\s]|\S)_([^a-zA-Z0-9_]|$)/g, '$1<i>$2</i>$3');
-        html = html.replace(/(^|[^a-zA-Z0-9_])_([^\_\s][^_]*?[^_\s]|\S)_([^a-zA-Z0-9_]|$)/g, '$1<i>$2</i>$3');
-        // 5. Código inline: `código`
         html = html.replace(/`([^`]+?)`/g, '<code class="inline-code">$1</code>');
-        // 6. Tachado: ~~texto~~
         html = html.replace(/~~(.+?)~~/g, '<s>$1</s>');
+        
+        // 3. Restaurar tokens intactos
+        for (var i = stash.length - 1; i >= 0; i--) {
+            html = html.replace('@@TKN' + i + '@@', stash[i]);
+        }
         return html;
     }
 
