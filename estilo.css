@@ -1331,3 +1331,61 @@ body:not(.nightMode):not(.night_mode) #front-back-box .cloze {
 .is-cloze-card #btn-toggle-front-back {
     display: none !important;
 }
+
+
+/* ============================================================================
+ * SUPORTE RESPONSIVO A FORMULAS MATHJAX / LATEX NO MOBILE
+ * ============================================================================ */
+.math-block-container {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    text-align: center;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: thin;
+}
+
+mjx-container {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    vertical-align: middle !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+}
+
+mjx-container[display="true"] {
+    display: block !important;
+    text-align: center !important;
+    margin: 6px auto !important;
+    padding: 4px 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.math-block-container::-webkit-scrollbar,
+mjx-container::-webkit-scrollbar {
+    height: 4px;
+}
+.math-block-container::-webkit-scrollbar-thumb,
+mjx-container::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.3);
+    border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+    mjx-container[display="true"] {
+        font-size: 88% !important;
+    }
+    .math-block-container {
+        padding: 8px 6px !important;
+    }
+}
