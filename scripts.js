@@ -14,7 +14,7 @@
         rawFields.setAttribute('data-mounted', 'true');
     }
 
-        function sanitizeMarkdown(html) {
+            function sanitizeMarkdown(html) {
         if (!html || typeof html !== 'string') return '';
         var stash = [];
         function saveToken(match) {
@@ -22,9 +22,9 @@
             return '@@TKN' + (stash.length - 1) + '@@';
         }
         
-        // 1. Proteger fórmulas matemáticas e tags HTML contra corrupção de Markdown
+        // 1. Proteger formulas matematicas e tags HTML contra corrupcao de Markdown
         html = html.replace(/\\\[[\s\S]*?\\\]/g, saveToken);
-        html = html.replace(/\\\([\s\S]*?\\\\)/g, saveToken);
+        html = html.replace(/\\\([\s\S]*?\\\)/g, saveToken);
         html = html.replace(/<anki-mathjax[\s\S]*?<\/anki-mathjax>/gi, saveToken);
         html = html.replace(/<[^>]+>/g, saveToken);
         
