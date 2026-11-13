@@ -39,6 +39,21 @@
         return sanitizeMarkdown(val);
     }
 
+    function triggerMathJaxRender() {
+        try {
+            if (window.MathJax) {
+                if (typeof MathJax.typesetPromise === 'function') {
+                    MathJax.typesetPromise().catch(function(err){});
+                } else if (typeof MathJax.typeset === 'function') {
+                    MathJax.typeset();
+                } else if (MathJax.Hub && typeof MathJax.Hub.Queue === 'function') {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                }
+            }
+        } catch(e) {}
+    }
+
+
     var side = rawFields ? (rawFields.getAttribute('data-side') || 'front') : (document.getElementById('answer') ? 'back' : 'front');
     var appRoot = document.getElementById('anki-app-root');
 
@@ -143,6 +158,8 @@
                         drmHtml +
                     '</div>' +
                 '</div>';
+        triggerMathJaxRender();
+        setTimeout(triggerMathJaxRender, 80);
         } else {
             appRoot.innerHTML =
                 '<div class="card-scene">' +
@@ -227,6 +244,8 @@
                         drmHtml +
                     '</div>' +
                 '</div>';
+        triggerMathJaxRender();
+        setTimeout(triggerMathJaxRender, 80);
         }
     }
 
@@ -354,7 +373,7 @@
     function extrairTextoElemento(el) {
         if (!el) return '';
         var clone = el.cloneNode(true);
-        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style');
+        var ignorar = clone.querySelectorAll('.mermaid, .mermaid-pending, pre.mermaid, svg, .mermaid-box, script, style, .tts-ignore, [data-tts="ignore"], mjx-container, .MathJax, math');
         for (var i = 0; i < ignorar.length; i++) {
             if (ignorar[i].parentNode) ignorar[i].parentNode.removeChild(ignorar[i]);
         }
@@ -1930,6 +1949,8 @@
             window.__ANKI_TOGGLE_EXP_TIMER__ = setTimeout(function() {
                 if (commentBox) commentBox.style.display = 'none';
                 content.style.display = 'block';
+                triggerMathJaxRender();
+                setTimeout(triggerMathJaxRender, 60);
                 content.style.animation = 'fadeIn 0.25s ease-in-out forwards';
                 btn.innerHTML = 'Ocultar';
                 btn.classList.add('active');
